@@ -13,11 +13,11 @@ body {
   background-color: #282c34;
 }
 
-header{
+header {
   margin-bottom: 50px;
 }
-.title{
-  font-family: sistem-ui;
+
+.title {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
@@ -29,34 +29,84 @@ header{
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
 }
 
 .buttons-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
-
-}
-.start-button{
-  position:absolute;
-  width: 100px;
-  height: 30px;
-  top: 395px;
-  left: 717px;
 }
 
-.score{
-  position:absolute;
-  width: 50px;
-  height: 50px;
-  top: 380px;
-  left: 743px;
+.start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.start-button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 18px;
+  background-color: #f39c12;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #e67e22;
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.difficulty-button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.difficulty-button:hover {
+  background-color: #2980b9;
+}
+
+.score {
   background-color: black;
   color: white;
   border-radius: 50%;
-  line-height: 50px;
-  text-align: center;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: larger;
+  margin-top: 20px;
+}
+
+.game-over {
+  color: white;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .game-buttons {
@@ -100,24 +150,4 @@ header{
 
 .game-buttons.blue {
   background-color: blue;
-}
-
-
-.game-over{
-  position: absolute;
-  position:absolute;
-  width: 200px;
-  height: 200px;
-  top: 310px;
-  left: 665px;
-  background-color: black;
-  color: white;
-  border-radius: 50%;
-  line-height: 50px;
-  text-align: center;
-  font-size: larger;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }

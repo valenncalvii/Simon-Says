@@ -6,7 +6,7 @@ import Timeout from "./utils/Util";
 function App() {
   const [isOn, setIsOn] = useState(false); // setea el estado de juego de inicio
 
-  const colorList = ["green", "red", "yellow", "blue"]; 
+  const colorList = ["green", "red", "yellow", "blue"];
   //objeto para el estado inicial del juego
   const initPlay = {
     isDisplay: false,
@@ -16,12 +16,12 @@ function App() {
     userColors: [],
   };
   const [play, setPlay] = useState(initPlay); // setea el estado de juego a el estado de "empezo el juego"
-  const [flashColor, setFlashColor] = useState("");// setea el estado para que los colores hagan efecto flash
+  const [flashColor, setFlashColor] = useState(""); // setea el estado para que los colores hagan efecto flash
   //funcion para comenzar el juego
   function handleStartGame() {
     setIsOn(true);
   }
-//cambia el isDisplay a true cuando isOn es true
+  //cambia el isDisplay a true cuando isOn es true
   useEffect(() => {
     if (isOn) {
       setPlay({ ...initPlay, isDisplay: true });
@@ -29,7 +29,7 @@ function App() {
       setPlay(initPlay);
     }
   }, [isOn]);
-//randomiza los colores para devolver el patron cuando isOn e isDisplay son true
+  //randomiza los colores para devolver el patron cuando isOn e isDisplay son true
   useEffect(() => {
     if (isOn && play.isDisplay) {
       let newColor = colorList[Math.floor(Math.random() * 4)];
@@ -39,13 +39,13 @@ function App() {
       setPlay({ ...play, colors: copyColors });
     }
   }, [isOn, play.isDisplay]);
-//cuando isOn e isDisplay son true y la longitud de colores es almenos 1, muestra el patron de colores ilumminado
+  //cuando isOn e isDisplay son true y la longitud de colores es almenos 1, muestra el patron de colores ilumminado
   useEffect(() => {
     if (isOn && play.isDisplay && play.colors.length) {
       displayColors();
     }
   }, [isOn, play.isDisplay, play.colors.length]);
-//funcion para que los colores se iluminen
+  //funcion para que los colores se iluminen
   async function displayColors() {
     await Timeout(2000);
     for (let i = 0; i < play.colors.length; i++) {
@@ -66,7 +66,7 @@ function App() {
       }
     }
   }
-//funcion para manejar los clicks de los botones y que coincidan con el patron
+  //funcion para manejar los clicks de los botones y que coincidan con el patron
   async function handleClick(color) {
     if (!play.isDisplay && play.userPlay) {
       const copyUserColors = [...play.userColors];
@@ -95,16 +95,16 @@ function App() {
       setFlashColor("");
     }
   }
-//funcion para manejar el reinicio del juego
-  function handleClose(){
+  //funcion para manejar el reinicio del juego
+  function handleClose() {
     setIsOn(false);
   }
 
   return (
     <>
-     <header>
-      <h1 className="title">Simons Says</h1>
-     </header>
+      <header>
+        <h1 className="title">Simons Says</h1>
+      </header>
       <main className="game-container">
         <div className="buttons-container">
           <ColorCard
@@ -139,18 +139,41 @@ function App() {
         {isOn && !play.isDisplay && !play.userPlay && play.score && (
           <div className="game-over">
             <div>Final Score: {play.score}</div>
-            <button onClick={handleClose}>Close</button>
+            <button onClick={handleClose} className="start-button">Try Again</button>
           </div>
         )}
-        {!isOn && !play.score && (
-          <button onClick={handleStartGame} className="start-button">
-            Iniciar Juego
-          </button>
-        )}
+
         {isOn && (play.isDisplay || play.userPlay) && (
           <div className="score">{play.score}</div>
         )}
       </main>
+      {!isOn && !play.score && (
+        <div className="start-container">
+          <button onClick={handleStartGame} className="start-button">
+            Iniciar Juego
+          </button>
+          <div className="difficulty-buttons">
+            <button
+              onClick={() => setDifficulty("easy")}
+              className="difficulty-button"
+            >
+              Fácil
+            </button>
+            <button
+              onClick={() => setDifficulty("medium")}
+              className="difficulty-button"
+            >
+              Medio
+            </button>
+            <button
+              onClick={() => setDifficulty("hard")}
+              className="difficulty-button"
+            >
+              Difícil
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
